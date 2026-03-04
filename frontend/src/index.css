@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+/* You can add your own custom styles below if needed */
+@layer base {
+  body {
+    @apply bg-gray-950 text-gray-100 min-h-screen;
+  }
+}
+
+/* Optional: remove default margins etc. */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

@@ -1,0 +1,75 @@
+React Router :--
+
+URL changes ──▶ React Router decides ──▶ Which component to render
+Example:
+
+/ → <Home />
+
+/login → <Login />
+
+/products → <ProductList />
+
+<BrowserRouter> 
+    <App/>
+<BrowserRouter/>
+
+import FileName from "./pages/FileName"
+return{
+    <Routes>
+        <Route path="/FileName" element={<FileName/>}/>
+    <Routes/>
+};
+
+
+Page (layout & spacing)
+ └── Section (width, padding)
+      └── Component (flex, gap, alignment)
+           └── Element (text, color, size)
+
+HEADER (full width)
+ └─ NAV (centered container)
+     ├─ Logo
+     ├─ Links
+     └─ Actions (search + icons)
+
+APP
+ └─ LAYOUT (Navbar + Footer + Outlet)
+      └─ PAGE (Home / About / Contact)
+🧠 Key rules (burn these into memory)
+✅ element → WHAT to render
+✅ path → WHEN to render
+✅ Layout routes usually have NO path
+✅ <Outlet /> = where child page appears
+
+| Thing      | Case                                |
+| ---------- | ----------------------------------- |
+| Component  | `Login`, `SignUp`, `HomePage`       |
+| File       | `Login.jsx`, `SignUp.jsx`           |
+| Route path | `/login`, `/signup`, `/product/:id` |
+| Links      | `<Link to="/login" />`              |
+
+5️⃣ Design rule you just learned (VERY important)
+
+Pass the smallest amount of data required to do the job.
+
+Action	Pass
+Delete	id
+Update	id + changed fields
+Create	full object
+Display	full object
+// Data source (localStorage / API)
+//         ↓
+// WishList page (state)
+//         ↓
+// ProductCard (props, single product)
+
+// 🔑 Key correction first (very important)
+
+// ❌ “an array must be passed as a prop here”
+// ✅ The Wishlist page OWNS the array and passes each item to ProductCard
+
+// You do not pass the array into WishList as a prop
+// WishList is a page, not a child component.
+
+stringify = object → string
+📦 parse = string → object

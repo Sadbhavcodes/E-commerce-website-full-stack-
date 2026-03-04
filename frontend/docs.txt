@@ -1,0 +1,693 @@
+import { Link } from "react-router-dom";
+import { search, fav, cart } from "../assets/icons"
+export default function Navbar() {
+    return (
+        <header className="border-b">
+            <nav className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+
+                <h2 className="text-xl font-bold">Exclusive</h2>
+                <ul className="flex gap-6 text-sm font-medium">
+                    <li className="hover:text-red-500 transition"><Link to="/">Home</Link></li>
+                    <li className="hover:text-red-500 transition"><Link to="/contact">Contact</Link></li>
+                    <li className="hover:text-red-500 transition"><Link to="/about">About</Link></li>
+                    <li className="hover:text-red-500 transition"><Link to="/signup">Sign Up</Link></li>
+                </ul>
+                <div className="flex items-center gap-4">
+                    <div className="flex items-center border rounded-md px-3 py-2 gap-2 hover:border-black">
+                        <input
+                            type="text"
+                            placeholder="What are you looking for?"
+                            className="outline-none text-sm w-48"
+                        />
+                        <button
+                            type="button"
+                            className="px-3 py-2 hover:bg-gray-100 transition"
+                            aria-label="search">
+                            <img src={search} alt="" className="w-4 h-4" />
+                        </button>
+                    </div>
+
+                    <button
+                        className="hover:opacity-70 transition" aria-label="wishlist">
+                        <img src={fav} alt="" className="w-5 h-5" />
+                    </button>
+                    <button
+                        className="hover:opacity-70 transition" aria-label="cart">
+                        <img src={cart} alt="" className="w-5 h-5" />
+                    </button>
+                </div>
+            </nav>
+        </header>
+    );
+}
+import { bin, cart1 } from "../assets/icons";
+
+export default function ProductCard({ product, onRemove, onAddToCart }) {
+  return (
+    <div className="border rounded-md p-4 relative hover:shadow-md transition">
+
+      <div className="relative mb-4">
+        <button
+          onClick={() => onRemove(product.id)}
+          className="absolute top-2 right-2 p-1 bg-white rounded-full shadow hover:bg-red-50"
+        >
+          <img src={bin} alt="Remove" className="w-4 h-4" />
+        </button>
+
+        <img
+          src={product.image}
+          alt={product.title}
+          className="w-full h-40 object-contain"
+        />
+      </div>
+      <button
+        onClick={() => onAddToCart(product)} 
+        className="w-full flex items-center justify-center gap-2 bg-black text-white py-2 rounded hover:bg-gray-800 transition mb-3"
+      >
+        <img src={cart1} alt="Cart" className="w-4 h-4" />
+        Add To Cart
+      </button>
+      <div>
+        <p className="text-sm font-medium mb-1">
+          {product.title}
+        </p>
+
+        <p className="text-red-500 font-semibold">
+          ${product.price}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+import { vector } from "../assets/icons";
+
+export default function CartItemStrip({ product, onRemove }) {
+    const totalPrice = product.quantity * product.price;
+
+    return (
+        <div className="grid grid-cols-5 items-center py-4 border-b text-sm">
+
+            <div className="flex items-center gap-3">
+                <button
+                    onClick={() => onRemove(product.id)}
+                    className="text-red-500 hover:scale-110 transition"
+                    aria-label="remove"
+                >
+                    <img src={vector} alt="remove" className="w-4 h-4" />
+                </button>
+
+                <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-12 h-12 object-contain"
+                />
+
+                <span>{product.name}</span>
+            </div>
+
+            <div>${product.price}</div>
+
+            <div>{product.quantity}</div>
+
+
+            <div className="font-medium">${totalPrice}</div>
+        </div>
+    );
+}
+import { Link } from "react-router-dom";
+
+import {
+  send,
+  qr,
+  google,
+  apple,
+  insta,
+  facebook,
+  linkin,
+  twitter,
+  copyright,
+} from "../assets/icons";
+
+const SOCIAL_LINKS = [
+  { icon: facebook, url: "https://facebook.com", label: "Facebook" },
+  { icon: twitter, url: "https://twitter.com", label: "Twitter" },
+  { icon: insta, url: "https://instagram.com", label: "Instagram" },
+  { icon: linkin, url: "https://linkedin.com", label: "LinkedIn" },
+];
+
+const APP_LINKS = [
+  { icon: google, url: "https://play.google.com", label: "Google Play" },
+  { icon: apple, url: "https://www.apple.com/app-store/", label: "App Store" },
+];
+
+export default function Footer() {
+  return (
+    <footer className="bg-black text-gray-300">
+      <section className="max-w-7xl mx-auto px-4 py-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-10">
+          <ul className="space-y-4">
+            <li>
+              <h2 className="text-white text-lg font-semibold">Exclusive</h2>
+            </li>
+            <li>
+              <Link to="/subscribe" className="hover:text-white">
+                Subscribe
+              </Link>
+            </li>
+            <li className="text-sm">
+              Get 10% off your first order
+            </li>
+            <li>
+              <div className="flex items-center border border-gray-600 rounded-md overflow-hidden">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="bg-transparent px-3 py-2 text-sm outline-none w-full"
+                />
+                <button className="px-3">
+                  <img src={send} alt="Send" className="w-4 h-4" />
+                </button>
+              </div>
+            </li>
+          </ul>
+          <ul className="space-y-4 text-sm">
+            <li>
+              <h2 className="text-white text-lg font-semibold">Support</h2>
+            </li>
+            <li>
+              111 Bijoy sarani, Dhaka,
+              <br />
+              DH-1515, Bangladesh.
+            </li>
+            <li>exclusive@gmail.com</li>
+            <li>+88015-88888-9999</li>
+          </ul>
+          <ul className="space-y-3 text-sm">
+            <li>
+              <h2 className="text-white text-lg font-semibold">Account</h2>
+            </li>
+            <li><Link to="/account" className="hover:text-white">My Account</Link></li>
+            <li><Link to="/login" className="hover:text-white">Login / Register</Link></li>
+            <li><Link to="/cart" className="hover:text-white">Cart</Link></li>
+            <li><Link to="/wishlist" className="hover:text-white">Wishlist</Link></li>
+            <li><Link to="/shop" className="hover:text-white">Shop</Link></li>
+          </ul>
+          <ul className="space-y-3 text-sm">
+            <li>
+              <h2 className="text-white text-lg font-semibold">Quick Link</h2>
+            </li>
+            <li><Link to="/privacypolicy" className="hover:text-white">Privacy Policy</Link></li>
+            <li><Link to="/termofuse" className="hover:text-white">Term Of Use</Link></li>
+            <li><Link to="/faq" className="hover:text-white">FAQ</Link></li>
+            <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
+          </ul>
+          <ul className="space-y-4 text-sm">
+            <li>
+              <h2 className="text-white text-lg font-semibold">Download App</h2>
+            </li>
+            <li>Save $3 with App New User Only</li>
+            <li className="flex gap-4">
+              <img src={qr} alt="QR Code" className="w-20 h-20" />
+              <div className="flex flex-col gap-2">
+                {APP_LINKS.map(({ icon, url, label }) => (
+                  <a
+                    key={label}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={icon} alt={label} className="h-10" />
+                  </a>
+                ))}
+              </div>
+            </li>
+            <li className="flex gap-4 pt-2">
+              {SOCIAL_LINKS.map(({ icon, url, label }) => (
+                <a
+                  key={label}
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:opacity-70"
+                >
+                  <img src={icon} alt={label} className="w-5 h-5" />
+                </a>
+              ))}
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section className="border-t border-gray-800 py-4">
+        <div className="flex items-center justify-center gap-2 text-xs text-gray-500">
+          <img src={copyright} alt="Copyright" className="w-3 h-3" />
+          <p>Copyright Rimel 2022. All rights reserved</p>
+        </div>
+      </section>
+    </footer>
+  );
+}
+import { CartItemStrip } from "../components";
+import { useEffect,useState } from "react";
+import { getFromLocalStorage, saveToLocalStorage } from "../utils/localstorage";
+import { Link } from "react-router-dom";
+export default function Cart() {
+    const [cart,setCart] = useState([]);
+    useEffect(() => {
+        setCart(getFromLocalStorage("cart"));
+    },[]);
+    useEffect(() => {
+        saveToLocalStorage("cart",cart);
+    },[cart]);
+    const handleRemove = (id) => {
+        const updatedCart = cart.filter(item => item.id !== id);
+        setCart(updatedCart);
+    };
+    return (
+        <div>
+            <div>
+                <ul>
+                    <li>Product</li>
+                    <li>Price</li>
+                    <li>Qunatity</li>
+                    <li>Subtotal</li>
+                </ul>
+            </div>
+            <div>
+                {cart.length > 0 ? (
+                    cart.map(product => (
+                        <CartItemStrip
+                            key={product.id}
+                            product={product}
+                            onRemove={handleRemove}
+                        />
+                    ))
+                ): (
+                    <p>Your cart is empty</p>
+                )}
+            </div>
+            <div>
+                <Link to="/">Return To Shop</Link>
+                <button>
+                    Update Cart
+                </button>
+
+            </div>
+            <div>
+                <input
+                    type="text"
+                    placeholder="Coupon Code"
+                />
+                <button
+                    type="submit"
+                >
+                    Apply Coupon
+                </button>
+            </div>
+            <div>
+                <h2>Cart Total</h2>
+                <ul>
+                    <li>Subtotal:       { }</li>
+                    <li>Shipping:       { }</li>
+                    <li>Total:          { }</li>
+                </ul>
+                <Link to="/checkout">Process to Checkout</Link>
+            </div>
+        </div>
+    );
+}
+import { Link } from "react-router-dom";
+
+export default function Error404() {
+    return (
+        <section className="min-h-[calc(100vh-140px)] flex items-center justify-center px-6">
+            <div className="text-center max-w-xl">
+                <p className="text-sm text-gray-400 mb-6">
+                    Home / 404 Error
+                </p>
+
+                <h1 className="text-6xl md:text-7xl font-bold tracking-wide mb-6">
+                    404 Not Found
+                </h1>
+
+                <p className="text-gray-500 mb-10">
+                    Your visited page not found. You may go home page.
+                </p>
+
+                <Link
+                    to="/"
+                    aria-label="Back to home page"
+                    className="inline-block bg-red-500 text-white px-8 py-3 rounded-md hover:bg-red-600 transition"
+                >
+                    Back to home page
+                </Link>
+
+            </div>
+        </section>
+    );
+}
+import { beatsnoop } from "../assets/icons";
+
+export default function Login() {
+    return (
+        <section className="min-h-[calc(100vh-140px)] flex items-center justify-center">
+            <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-10 items-center px-6">
+                <div className="hidden md:flex justify-center">
+                    <img
+                        src={beatsnoop}
+                        alt="Login visual"
+                        className="max-w-md w-full object-contain"
+                    />
+                </div>
+                <div className="w-full max-w-md mx-auto">
+                    <div className="mb-8">
+                        <h1 className="text-3xl font-semibold text-gray-900">
+                            Log in to Exclusive
+                        </h1>
+                        <p className="text-gray-500 mt-2">
+                            Enter your details below
+                        </p>
+                    </div>
+                    <form className="space-y-6">
+                        <input
+                            type="email"
+                            placeholder="Email or Phone Number"
+                            className="w-full border-b border-gray-300 py-2 outline-none focus:border-black transition"
+                        />
+
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            className="w-full border-b border-gray-300 py-2 outline-none focus:border-black transition"
+                        />
+                        <div className="flex items-center justify-between pt-4">
+                            <button
+                                type="submit"
+                                className="bg-red-500 text-white px-8 py-3 rounded-md hover:bg-red-600 transition"
+                            >
+                                Log In
+                            </button>
+
+                            <a
+                                href="/"
+                                className="text-red-500 text-sm hover:underline"
+                            >
+                                Forget Password?
+                            </a>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+    );
+}
+import { beatsnoop, googleLogo } from "../assets/icons";
+import { Link } from "react-router-dom";
+
+export default function SignUp() {
+    return (
+        <section className="min-h-[calc(100vh-140px)] flex items-center justify-center">
+            <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-10 px-6">
+
+                <div className="hidden md:flex justify-center">
+                    <img src={beatsnoop} alt="Signup visual" className="max-w-md w-full" />
+                </div>
+
+                <div className="max-w-md w-full mx-auto">
+                    <div className="mb-8">
+                        <h1 className="text-3xl font-semibold">Create an account</h1>
+                        <p className="text-gray-500 mt-2">Enter your details below</p>
+                    </div>
+
+                    <form className="space-y-6">
+                        <input type="text" placeholder="Name"
+                            className="w-full border-b py-2 outline-none focus:border-black" />
+
+                        <input type="email" placeholder="Email or Phone Number"
+                            className="w-full border-b py-2 outline-none focus:border-black" />
+
+                        <input type="password" placeholder="Password"
+                            className="w-full border-b py-2 outline-none focus:border-black" />
+
+                        <button
+                            type="submit"
+                            className="w-full bg-red-500 text-white py-3 rounded-md hover:bg-red-600 transition"
+                        >
+                            Create Account
+                        </button>
+                    </form>
+                    <button
+                        className="mt-4 w-full flex items-center justify-center gap-3 border py-3 rounded-md hover:bg-gray-50 transition"
+                    >
+                        <img src={googleLogo} alt="Google" className="w-5 h-5" />
+                        Sign up with Google
+                    </button>
+                    <p className="text-sm text-center mt-6">
+                        Already have an account?{" "}
+                        <Link to="/login" className="text-red-500 hover:underline">
+                            Log in
+                        </Link>
+                    </p>
+                </div>
+
+            </div>
+        </section>
+    );
+}
+import { ProductCard } from "../components";
+import { useEffect, useState } from "react";
+import { saveToLocalStorage, getFromLocalStorage } from "../utils/localstorage";
+
+export default function WishList() {
+
+    const [wishlist, setWishList] = useState([]);
+
+    // Load once
+    useEffect(() => {
+        setWishList(getFromLocalStorage("wishlist"));
+    }, []);
+
+    // Save whenever wishlist changes
+    useEffect(() => {
+        saveToLocalStorage("wishlist", wishlist);
+    }, [wishlist]);
+    // earlier we were writing saving code everywhere but just create a useffect that handles that code everytime wishlist changes
+    const handleRemove = (id) => {
+        const updatedWishList = wishlist.filter(item => item.id !== id);
+        setWishList(updatedWishList);
+    };
+
+    const handleAddtoCart = (product) => {
+        const storedCart = getFromLocalStorage("cart");
+
+        const alreadyExists = storedCart.find(item => item.id === product.id);
+
+        if (!alreadyExists) {
+            const updatedCart = [...storedCart, product];
+            saveToLocalStorage("cart", updatedCart);
+        }
+    };
+
+    return (
+        <div className="max-w-7xl mx-auto px-6 py-10">
+
+            <div className="flex justify-between items-center mb-6">
+                <p className="text-lg font-semibold">
+                    Wishlist ({wishlist.length})
+                </p>
+
+                <button className="border px-4 py-2 rounded hover:bg-black hover:text-white transition">
+                    Move All To Bag
+                </button>
+            </div>
+
+            <div className="grid grid-cols-4 gap-6">
+                {wishlist.length > 0 ? (
+                    wishlist.map(product => (
+                        <ProductCard
+                            key={product.id}
+                            product={product}
+                            onRemove={handleRemove}
+                            onAddToCart={handleAddtoCart}
+                        />
+                    ))
+                ) : (
+                    <p>Your wishlist is empty.</p>
+                )}
+            </div>
+
+        </div>
+    );
+}
+export function saveToLocalStorage(key, value) {
+    try {
+        localStorage.setItem(key, JSON.stringify(value));
+    } catch (error) {
+        console.error("Error saving to localStorage:", error);
+    }
+}
+
+export function getFromLocalStorage(key) {
+    try {
+        const item = localStorage.getItem(key);
+        return item ? JSON.parse(item) : [];
+    } catch (error) {
+        console.error("Error reading from localStorage:", error);
+        return [];
+    }
+}
+import { Routes, Route } from "react-router-dom";
+
+import MainLayout from "./layouts/MainLayout";
+
+import HomePage from "./pages/HomePage";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
+import ProductDetail from "./pages/ProductDetail";
+import Cart from "./pages/Cart";
+import CheckOut from "./pages/CheckOut";
+import WishList from "./pages/WishList";
+import Error404 from "./pages/Error404";
+
+export default function App() {
+  return (
+    <Routes>
+      <Route element={<MainLayout />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<CheckOut />} />
+        <Route path="/wishlist" element={<WishList />} />
+
+        {/* 404 fallback */}
+        <Route path="*" element={<Error404 />} />
+      </Route>
+    </Routes>
+  );
+}
+import { CartItemStrip } from "../components";
+import { useEffect, useState } from "react";
+import { getFromLocalStorage, saveToLocalStorage } from "../utils/localstorage";
+import { Link } from "react-router-dom";
+
+export default function Cart() {
+    const [cart, setCart] = useState([]);
+
+    useEffect(() => {
+        setCart(getFromLocalStorage("cart") || []);
+    }, []);
+
+    useEffect(() => {
+        saveToLocalStorage("cart", cart);
+    }, [cart]);
+
+    const handleRemove = (id) => {
+        const updatedCart = cart.filter(item => item.id !== id);
+        setCart(updatedCart);
+    };
+
+    const subtotal = cart.reduce((acc, item) => {
+        return acc + item.price * item.quantity;
+    }, 0);
+
+    const shipping = subtotal > 0 ? 50 : 0;
+    const total = subtotal + shipping;
+
+    return (
+        <div className="space-y-10">
+
+            {/* Header Row */}
+            <div className="bg-white shadow-sm rounded-md p-4">
+                <ul className="grid grid-cols-4 font-semibold text-sm text-gray-600">
+                    <li>Product</li>
+                    <li>Price</li>
+                    <li>Quantity</li>
+                    <li>Subtotal</li>
+                </ul>
+            </div>
+
+            {/* Cart Items */}
+            <div className="space-y-4">
+                {cart.length > 0 ? (
+                    cart.map(product => (
+                        <CartItemStrip
+                            key={product.id}
+                            product={product}
+                            onRemove={handleRemove}
+                        />
+                    ))
+                ) : (
+                    <p className="text-center text-gray-500 py-10">
+                        Your cart is empty
+                    </p>
+                )}
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex justify-between items-center">
+                <Link
+                    to="/"
+                    className="border px-6 py-2 rounded hover:bg-gray-100 transition"
+                >
+                    Return To Shop
+                </Link>
+
+                <button className="border px-6 py-2 rounded hover:bg-gray-100 transition">
+                    Update Cart
+                </button>
+            </div>
+
+            {/* Coupon + Totals Section */}
+            <div className="grid md:grid-cols-2 gap-8">
+
+                {/* Coupon */}
+                <div className="flex gap-4">
+                    <input
+                        type="text"
+                        placeholder="Coupon Code"
+                        className="border px-4 py-2 rounded w-full focus:outline-none focus:ring-1 focus:ring-black"
+                    />
+                    <button
+                        type="submit"
+                        className="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600 transition"
+                    >
+                        Apply Coupon
+                    </button>
+                </div>
+
+                {/* Cart Totals */}
+                <div className="border rounded-md p-6 space-y-4 h-fit">
+                    <h2 className="text-lg font-semibold">Cart Total</h2>
+
+                    <ul className="space-y-3 text-sm">
+                        <li className="flex justify-between">
+                            <span>Subtotal:</span>
+                            <span>${subtotal}</span>
+                        </li>
+
+                        <li className="flex justify-between">
+                            <span>Shipping:</span>
+                            <span>${shipping}</span>
+                        </li>
+
+                        <li className="flex justify-between font-semibold text-base border-t pt-3">
+                            <span>Total:</span>
+                            <span>${total}</span>
+                        </li>
+                    </ul>
+
+                    <Link
+                        to="/checkout"
+                        className="block text-center bg-black text-white py-3 rounded hover:bg-gray-800 transition"
+                    >
+                        Process to Checkout
+                    </Link>
+                </div>
+
+            </div>
+        </div>
+    );
+}
