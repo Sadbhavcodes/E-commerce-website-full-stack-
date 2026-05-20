@@ -4,6 +4,8 @@ A modern, fully responsive e-commerce frontend built with **React 19**, **Vite**
 
 ---
 
+## Go to frontend directory the main code is in there
+
 ## 📸 Screenshots
 
 ### 🏠 Home Page — Hero Banner + Flash Sales
@@ -129,7 +131,7 @@ npm install
 npm run dev
 ```
 
-The app will be running at **http://localhost:5173** 🎉
+The app will be running at **e-commerce-website-full-stack-cul8-c73rb1xui-sadbhavs-projects.vercel.app** 🎉
 
 ---
 
